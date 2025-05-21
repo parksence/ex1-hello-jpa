@@ -49,7 +49,7 @@ public class JpaMain {
             Member member = em.find(Member.class, 200L);
             member.setName("World");
 
-            em.detach(member);
+            em.clear();
 
             System.out.println("====================");
 
