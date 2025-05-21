@@ -40,8 +40,17 @@ public class JpaMain {
 //
 //            System.out.println("=== AFTER ===");
 
-            Member member = em.find(Member.class, 101L);
-            member.setName("Hello");
+//            Member member = new Member(200L, "Hello");
+//            em.persist(member);
+//
+//            // 강제 호출
+//            em.flush();
+
+            Member member = em.find(Member.class, 200L);
+            member.setName("World");
+
+            em.detach(member);
+
             System.out.println("====================");
 
             tx.commit();
