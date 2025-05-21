@@ -51,6 +51,8 @@ public class JpaMain {
 
             em.clear();
 
+            Member member2 = em.find(Member.class, 200L);
+
             System.out.println("====================");
 
             tx.commit();
