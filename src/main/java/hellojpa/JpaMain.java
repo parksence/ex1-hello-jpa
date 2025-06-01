@@ -22,6 +22,8 @@ public class JpaMain {
             member.setTeam(team);
             em.persist(member);
 
+            team.addMember(member);
+
             em.flush();
             em.clear();
 
@@ -31,11 +33,6 @@ public class JpaMain {
             for (Member m : members) {
                 System.out.println("m.getName() = " + m.getName());
             }
-
-            // 반대 방향으로 객체 그래프 탐색
-//            Team findTeam = em.find(Team.class, team.getId());
-//            int membersSize = findTeam.getMembers().size();
-
 
             tx.commit();
         } catch (Exception e) {
