@@ -2,9 +2,6 @@ package hellojpa;
 
 import jakarta.persistence.*;
 
-import java.time.LocalDateTime;
-import java.util.List;
-
 public class JpaMain {
 
     public static void main(String[] args) {
@@ -14,12 +11,8 @@ public class JpaMain {
         tx.begin();
 
         try {
-            Member member = new Member();
-            member.setName("user1");
-            member.setCreateBy("kim");
-            member.setCreateDateTime(LocalDateTime.now());
-
-            em.persist(member);
+            Member member = em.find(Member.class, 1L);
+            printMemberAndTeam(member);
 
             tx.commit();
         } catch (Exception e) {
@@ -29,5 +22,13 @@ public class JpaMain {
         }
 
         emf.close();
+    }
+
+    private static void printMemberAndTeam(Member member) {
+        String name = member.getName();
+        System.out.println("name = " + name);
+
+        Team team = member.getTeam();
+        System.out.println("team = " + team.getName());
     }
 }
