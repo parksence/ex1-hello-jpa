@@ -12,7 +12,8 @@ public class JpaMain {
 
         try {
             Member member = em.find(Member.class, 1L);
-            printMemberAndTeam(member);
+            printMember(member);
+            // printMemberAndTeam(member);
 
             tx.commit();
         } catch (Exception e) {
@@ -22,6 +23,10 @@ public class JpaMain {
         }
 
         emf.close();
+    }
+
+    private static void printMember(Member member) {
+        System.out.println("member = " + member.getName());
     }
 
     private static void printMemberAndTeam(Member member) {
