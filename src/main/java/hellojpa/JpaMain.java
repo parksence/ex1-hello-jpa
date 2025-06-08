@@ -14,28 +14,16 @@ public class JpaMain {
         tx.begin();
 
         try {
-            Team team = new Team();
-            team.setName("teamA");
-            em.persist(team);
+            Child child1 = new Child();
+            Child child2 = new Child();
 
-            Team team2 = new Team();
-            team2.setName("teamB");
-            em.persist(team2);
+            Parent parent = new Parent();
+            parent.addChild(child1);
+            parent.addChild(child2);
 
-            Member member = new Member();
-            member.setName("test1");
-            member.setTeam(team);
-            em.persist(member);
-
-            Member member2 = new Member();
-            member2.setName("test2");
-            member2.setTeam(team2);
-            em.persist(member2);
-
-            em.flush();
-            em.clear();
-
-            List<Member> members = em.createQuery("select m from Member m", Member.class).getResultList();
+            em.persist(parent);
+//            em.persist(child1);
+//            em.persist(child2);
 
             tx.commit();
         } catch (Exception e) {
