@@ -11,9 +11,19 @@ public class JpaMain {
         tx.begin();
 
         try {
-            Member member = em.find(Member.class, 1L);
-            printMember(member);
-            // printMemberAndTeam(member);
+            Member member = new Member();
+            member.setName("test1");
+            em.persist(member);
+
+            em.flush();
+            em.clear();
+
+            Member m1 = em.find(Member.class, member.getId());
+            System.out.println("m1.getClass() = " + m1.getClass());
+
+            Member reference = em.getReference(Member.class, member.getId());
+            System.out.println("reference.getClass() = " + reference.getClass());
+            System.out.println("m1 == reference : " + (m1 == reference));
 
             tx.commit();
         } catch (Exception e) {
