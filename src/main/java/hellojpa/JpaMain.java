@@ -1,6 +1,7 @@
 package hellojpa;
 
 import jakarta.persistence.*;
+import org.hibernate.Hibernate;
 
 public class JpaMain {
 
@@ -18,12 +19,9 @@ public class JpaMain {
             em.flush();
             em.clear();
 
-            Member m1 = em.find(Member.class, member.getId());
-            System.out.println("m1.getClass() = " + m1.getClass());
-
             Member reference = em.getReference(Member.class, member.getId());
-            System.out.println("reference.getClass() = " + reference.getClass());
-            System.out.println("m1 == reference : " + (m1 == reference));
+            System.out.println("reference.getClass() = " + reference.getClass()); // Proxy
+            Hibernate.initialize(reference.getClass()); // 강제 초기화
 
             tx.commit();
         } catch (Exception e) {
