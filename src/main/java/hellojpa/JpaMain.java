@@ -21,15 +21,8 @@ public class JpaMain {
             member.setHomeAddress(address);
             em.persist(member);
 
-            // 값 복사해서 사용하기
-            Address copyAddress = new Address(address.getCity(), address.getStreet(), address.getZipcode());
-
-            Member member2 = new Member();
-            member2.setName("member2");
-            member2.setHomeAddress(copyAddress);
-            em.persist(member2);
-
-            // member.getHomeAddress().setCity("newCity");
+            Address newAddress = new Address("NewCity", address.getStreet(), address.getZipcode());
+            member.setHomeAddress(newAddress);
 
             tx.commit();
         } catch (Exception e) {
